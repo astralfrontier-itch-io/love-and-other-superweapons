@@ -19,11 +19,15 @@ jobs:
         uses: DeterminateSystems/magic-nix-cache-action@v2
       - name: Nix Build
         run: nix build
+      - name: Copy Result to Out
+        run: |
+          mkdir out
+          cp result/*.pdf out/
       - uses: yeslayla/butler-publish-itchio-action@master
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: pdf
           ITCH_GAME: love-and-other-superweapons
           ITCH_USER: astralfrontier
-          PACKAGE: result/love-and-other-superweapons.pdf
+          PACKAGE: out/love-and-other-superweapons.pdf
           VERSION: ${{ github.ref }}
