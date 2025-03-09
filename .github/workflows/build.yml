@@ -26,5 +26,5 @@ jobs:
       - name: Publish Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: familiar-faces
-          path: out/familiar-faces.pdf
+          name: love-and-other-superweapons
+          path: out/love-and-other-superweapons.pdf
