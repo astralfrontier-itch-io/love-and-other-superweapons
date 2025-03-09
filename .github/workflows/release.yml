@@ -1,0 +1,29 @@
+name: "Release PDF"
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  releasepdf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v25
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+      - name: Install Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v2
+      - name: Nix Build
+        run: nix build
+      - uses: yeslayla/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: pdf
+          ITCH_GAME: love-and-other-superweapons
+          ITCH_USER: astralfrontier
+          PACKAGE: result/love-and-other-superweapons.pdf
+          VERSION: ${{ github.ref }}
