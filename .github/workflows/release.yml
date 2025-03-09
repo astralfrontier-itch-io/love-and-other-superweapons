@@ -30,4 +30,4 @@ jobs:
           ITCH_GAME: love-and-other-superweapons
           ITCH_USER: astralfrontier
           PACKAGE: out/love-and-other-superweapons.pdf
-          VERSION: ${{ github.ref }}
+          VERSION: ${{ github.ref_name }}
