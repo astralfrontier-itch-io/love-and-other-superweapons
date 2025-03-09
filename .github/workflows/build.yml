@@ -1,0 +1,30 @@
+name: "Build PDF"
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  buildpdf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v25
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+      - name: Install Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v2
+      - name: Nix Build
+        run: nix build
+      - name: Copy Result to Out
+        run: |
+          mkdir out
+          cp result/*.pdf out/
+      - name: Publish Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: familiar-faces
+          path: out/familiar-faces.pdf

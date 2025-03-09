@@ -1,0 +1,77 @@
+\startenvironment env_book
+
+\define[0]\GameName{Love and Other Superweapons}
+
+% Assume source files are UTF-8
+\enableregime[utf]
+
+% Set up PDF metadata
+\setupinteraction[state=start, title=\GameName, author=Astral Frontier]
+\setupbackend[format=PDF/X-1a:2003, intent=SWOP2006_Coated5v2.icc]
+
+% Page size is US-Letter
+\setuppapersize[letter,portrait]
+
+% Font definitions
+% \starttypescript [ebgaramond]
+%   \definefontsynonym[EBGaramond-Regular]    [file:EBGaramond-Regular]
+%   \definefontsynonym[EBGaramond-Italic]     [file:EBGaramond-Italic]
+%   \definefontsynonym[EBGaramond-Bold]       [file:EBGaramond-Bold]
+%   \definefontsynonym[EBGaramond-BoldItalic] [file:EBGaramond-BoldItalic]
+% \stoptypescript
+% 
+% \starttypescript [ebgaramond]
+%   \setups[font:fallback:serif]
+%   \definefontsynonym[Serif]                [EBGaramond-Regular]    [features=default]
+%   \definefontsynonym[SerifItalic]          [EBGaramond-Italic]     [features=default]
+%   \definefontsynonym[SerifBold]            [EBGaramond-Bold]       [features=default]
+%   \definefontsynonym[SerifBoldItalic]      [EBGaramond-BoldItalic] [features=default]
+% \stoptypescript
+% 
+% \starttypescript [ebgaramond]
+%   \definetypeface [ebgaramond]    [rm] [serif] [ebgaramond]    [default]
+% \stoptypescript
+% 
+% \setupbodyfont[ebgaramond]
+% \setupbodyfont[12pt]
+
+% A one-off definition for section titles
+% \definefont[FacesTitle][file:Abrakadaboom-KVEED*default at 48pt]
+
+% Show the book name and page number in the footer
+\setuppagenumbering[]
+\setupheadertexts[]
+\setupfootertexts[\GameName][pagenumber]
+
+% Don't show section numbers
+\setupheads[number=no]
+
+% Set up header styles
+% \setuphead[title][align=middle,style=FacesTitle]
+\setuphead[title][align=middle]
+\setuphead[section][align=middle,style=\tfb\bf,deeptextcommand=\underbar]
+\setuphead[subsection][align=middle,style=\bf,deeptextcommand=\underbar]
+
+% A custom style - a "subsection"
+\define[1]\subtitle{\startalignment[middle] \tfxx{#1} \stopalignment}
+
+% Space between paragraphs
+\setupwhitespace[halfline]
+
+% Some sections will be multi-column
+\setupcolumns[TwoColumn]
+
+% Define a macro used to indicate game terms - right now this just bolds the text
+\define[1]\gameterm{\bf{#1}}
+
+% Don't add extra whitespace in itemized lists
+\setupitemize[packed]
+
+% For some lists, we want some padding
+\definenarrower[SmallNarrower][left=1cm,right=1cm]
+\definenarrower[FullPageNarrower][left=.1\textwidth,right=.1\textwidth]
+
+% Image path configuration
+\setupexternalfigures[directory=.,location=local]
+
+\stopenvironment
